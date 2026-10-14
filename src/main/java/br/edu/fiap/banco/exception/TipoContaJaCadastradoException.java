@@ -1,9 +1,10 @@
 package br.edu.fiap.banco.exception;
 
-public class TipoContaJaCadastradoException
-        extends RuntimeException {
+import jakarta.ws.rs.core.Response;
+
+public class TipoContaJaCadastradoException extends ErroNegocioException {
 
     public TipoContaJaCadastradoException(String nome) {
-        super("Já existe um tipo de conta cadastrado com o nome: " + nome);
+        super(Response.Status.CONFLICT, "Tipo de conta já cadastrado: " + nome);
     }
 }

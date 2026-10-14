@@ -1,10 +1,12 @@
 package br.edu.fiap.banco.exception;
 
+import jakarta.ws.rs.core.Response;
+
 public class TipoContaEmUsoException
-        extends RuntimeException {
+        extends ErroNegocioException {
 
     public TipoContaEmUsoException(Long id) {
-        super(
+        super(Response.Status.CONFLICT,
                 "O tipo de conta de ID " + id +
                         " não pode ser excluído porque está associado a uma conta bancária."
         );

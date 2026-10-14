@@ -1,7 +1,7 @@
 package br.edu.fiap.banco.repository;
 
 import br.edu.fiap.banco.entity.TipoConta;
-import br.edu.fiap.banco.exception.TipoContaNaoEncontradaException;
+import br.edu.fiap.banco.exception.TipoContaNaoEncontradoException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
@@ -21,8 +21,22 @@ public class TipoContaRepositoryImpl implements TipoContaRepository {
     }
 
     @Override
+    public boolean existePorTipo(String nome) {
+        String sqlQuery = "SELECT 1 FROM tipo_conta Where nome = ?";
+        try (Connection connection = dataSource.getConnection();
+             PreparedStatement statement = connection.prepareStatement(sqlQuery)) {
+            statement.setString(1, nome);
+            try (ResultSet resultado = statement.executeQuery()) {
+                return resultado.next();
+            }
+        }catch(SQLException err){
+            throw new IllegalStateException("Falha ao consultar tipo de conta.", err);
+        }
+    }
+
+    @Override
     public TipoConta salvar(TipoConta tipoConta) {
-        String sql = "INSERT INTO tipos_conta (nome) VALUES (?)";
+        String sql = "INSERT INTO tipo_conta (nome) VALUES (?)";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql, Statement.RETURN_GENERATED_KEYS)) {
             statement.setString(1, tipoConta.nome());
@@ -40,7 +54,7 @@ public class TipoContaRepositoryImpl implements TipoContaRepository {
 
     @Override
     public List<TipoConta> listarTodos() {
-        String sql = "SELECT id, nome FROM tipos_conta ORDER BY nome";
+        String sql = "SELECT id, nome FROM tipo_conta ORDER BY nome";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql);
              ResultSet resultado = statement.executeQuery()) {
@@ -56,7 +70,7 @@ public class TipoContaRepositoryImpl implements TipoContaRepository {
 
     @Override
     public Optional<TipoConta> buscarPorId(Long id) {
-        String sql = "SELECT id, nome FROM tipos_conta WHERE id = ?";
+        String sql = "SELECT id, nome FROM tipo_conta WHERE id = ?";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setLong(1, id);
@@ -73,13 +87,13 @@ public class TipoContaRepositoryImpl implements TipoContaRepository {
 
     @Override
     public TipoConta atualizar(TipoConta tipoConta) {
-        String sql = "UPDATE tipos_conta SET nome = ? WHERE id = ?";
+        String sql = "UPDATE tipo_conta SET nome = ? WHERE id = ?";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setString(1, tipoConta.nome());
             statement.setLong(2, tipoConta.id());
             if (statement.executeUpdate() == 0) {
-                throw new TipoContaNaoEncontradaException();
+                throw new TipoContaNaoEncontradoException(tipoConta.id());
             }
             return tipoConta;
         } catch (SQLException err) {
@@ -89,7 +103,7 @@ public class TipoContaRepositoryImpl implements TipoContaRepository {
 
     @Override
     public boolean excluir(Long id) {
-        String sql = "DELETE FROM tipos_conta WHERE id = ?";
+        String sql = "DELETE FROM tipo_conta WHERE id = ?";
         try (Connection connection = dataSource.getConnection();
              PreparedStatement statement = connection.prepareStatement(sql)) {
             statement.setLong(1, id);

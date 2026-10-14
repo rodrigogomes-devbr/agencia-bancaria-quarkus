@@ -7,6 +7,10 @@ public record TipoConta(Long id, String nome) {
             throw new IllegalArgumentException("Nome é obrigatório");
         }
 
+        if(nome.length() > 41 ) {
+            throw new IllegalArgumentException("Nome deve ter no máximo 40 caracteres");
+        }
+
         nome = nome.trim().toUpperCase();
     }
 

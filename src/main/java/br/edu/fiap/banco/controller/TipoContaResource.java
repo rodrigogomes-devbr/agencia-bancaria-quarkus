@@ -1,10 +1,8 @@
 package br.edu.fiap.banco.controller;
 
-import br.edu.fiap.banco.dto.PessoaRequest;
 import br.edu.fiap.banco.dto.PessoaResponse;
 import br.edu.fiap.banco.dto.TipoContaRequest;
 import br.edu.fiap.banco.dto.TipoContaResponse;
-import br.edu.fiap.banco.service.PessoaService;
 import br.edu.fiap.banco.service.TipoContaService;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
@@ -16,6 +14,7 @@ import org.eclipse.microprofile.openapi.annotations.Operation;
 import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 
 import java.net.URI;
+import java.util.List;
 
 @Path("/api/tipos-conta")
 @Consumes(MediaType.APPLICATION_JSON)
@@ -32,32 +31,35 @@ public class TipoContaResource {
     @POST
     @Operation(summary = "Cadastra um Tipo de Conta")
     public Response cadastrar(@NotNull @Valid TipoContaRequest request) {
-        TipoContaResponse pessoa = service.cadastrar(request);
-        return Response.created(URI.create("/api/tipo-conta/" + pessoa.id()))
-                .entity(pessoa)
+        TipoContaResponse tipoConta = service.cadastrar(request);
+        return Response.created(URI.create("/api/tipo-conta/" + tipoConta.id()))
+                .entity(tipoConta)
                 .build();
     }
 
     @GET
-    public TipoContaResponse listarTipoConta() {
+    @Operation(summary = "Lista todos os tipos de conta")
+    public List<TipoContaResponse> listarTipoConta() {
         return service.listarTipoConta();
     }
 
-
     @GET
     @Path("/{id}")
+    @Operation(summary = "Lista tipo de conta por id")
     public TipoContaResponse getTipoContaById(@PathParam("id") Long id) {
         return service.getTipoContaById(id);
     }
 
     @PUT
     @Path("/{id}")
-    public PessoaResponse atualizar(@PathParam("id") Long id, @NotNull @Valid TipoContaRequest request) {
+    @Operation(summary = "Atualiza o tipo de conta")
+    public TipoContaResponse atualizar(@PathParam("id") Long id, @NotNull @Valid TipoContaRequest request) {
         return service.atualizar(id, request);
     }
 
     @DELETE
     @Path("/{id}")
+    @Operation(summary = "Exclui um tipo de conta")
     public Response excluir(@PathParam("id") Long id) {
         service.excluir(id);
         return Response.noContent().build();

@@ -1,5 +1,6 @@
 package br.edu.fiap.banco.repository;
 
+import br.edu.fiap.banco.dto.TipoContaRequest;
 import br.edu.fiap.banco.entity.TipoConta;
 
 import java.util.List;
@@ -7,6 +8,7 @@ import java.util.Optional;
 
 public interface TipoContaRepository {
 
+    boolean existePorTipo(String nome);
     TipoConta salvar(TipoConta tipoConta);
     List<TipoConta> listarTodos();
     Optional<TipoConta> buscarPorId(Long id);
