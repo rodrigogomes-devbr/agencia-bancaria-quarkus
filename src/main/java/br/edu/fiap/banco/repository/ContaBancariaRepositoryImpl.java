@@ -59,8 +59,46 @@ public class ContaBancariaRepositoryImpl implements ContaBancariaRepository{
     }
 
     @Override
+    public ContaBancaria salvar(ContaBancaria conta) {
+        String sql = "INSERT INTO contas_bancarias (agencia, numero, saldo, ativa, titular_id, tipo_conta_id) VALUES (?, ?, ?, ?, ?, ?)";
+
+        try (
+                Connection connection = dataSource.getConnection();
+                PreparedStatement statement = connection.prepareStatement(sql, PreparedStatement.RETURN_GENERATED_KEYS))
+        {
+            montarObjeto(statement, conta);
+
+            statement.executeUpdate();
+
+            try (ResultSet rs = statement.getGeneratedKeys()) {
+                if(!rs.next()) {
+                    throw new IllegalStateException("INSERT não devolveu id da conta");
+                }
+
+                return conta.comId(rs.getLong("id"));
+            }
+
+        }catch(SQLException err){
+            if("23505".equals(err.getSQLState())) {
+                throw new ContaJaCadastradaException();
+            }
+
+            throw new IllegalStateException("Falha ao salvar conta bancaria.", err);
+        }
+    }
+
+    private void montarObjeto(PreparedStatement ps, ContaBancaria conta) throws SQLException {
+        ps.setString(1, conta.agencia());
+        ps.setString(2, conta.numero());
+        ps.setBigDecimal(3, conta.saldo());
+        ps.setBoolean(4, conta.ativa());
+        ps.setLong(5, conta.titular().id());
+        ps.setLong(6, conta.tipoConta().id());
+    }
+
+    @Override
     public Optional<ContaBancaria> buscarPorId(Long id) {
-        String sqlPorId = SELECT_BASE  + " WHERE c.id = ?";
+        String sqlPorId = SELECT_BASE + " WHERE c.id = ?";
         
         if(consultarLista(sqlPorId, id).isEmpty()) {
             throw new ContaNaoEncontradaException();

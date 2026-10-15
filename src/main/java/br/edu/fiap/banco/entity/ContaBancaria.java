@@ -13,11 +13,11 @@ public record ContaBancaria(
 ) {
 
     public ContaBancaria {
-        if(agencia == null || agencia.isBlank() || agencia.matches("\\w{4}")){
+        if(agencia == null || agencia.isBlank() || agencia.matches("\\s{4}")){
             throw new IllegalArgumentException("Agencia deve ter 4 numeros");
         }
 
-        if(numero == null || numero.isBlank() || numero.matches("\\w{6}-\\w")){
+        if(numero == null || numero.isBlank() || numero.matches("\\s{6}-\\s")){
             throw new IllegalArgumentException("Numero da conta invalido");
         }
 
