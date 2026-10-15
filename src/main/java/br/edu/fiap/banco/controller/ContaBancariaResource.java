@@ -3,6 +3,7 @@ package br.edu.fiap.banco.controller;
 import br.edu.fiap.banco.dto.ContaBancariaRequest;
 import br.edu.fiap.banco.dto.ContaBancariaResponse;
 import br.edu.fiap.banco.service.ContaBancariaService;
+import io.quarkus.security.Authenticated;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -57,6 +58,7 @@ public class ContaBancariaResource {
 
     @GET
     @Path("/{id}")
+    @Authenticated()
     public ContaBancariaResponse listarPorId(@PathParam("id") Long id) {
         return service.buscarPorId(id);
     }
