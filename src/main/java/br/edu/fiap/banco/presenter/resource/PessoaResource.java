@@ -1,8 +1,8 @@
 package br.edu.fiap.banco.presenter.resource;
 
+import br.edu.fiap.banco.application.ports.PessoaUseCase;
 import br.edu.fiap.banco.presenter.dto.PessoaRequest;
 import br.edu.fiap.banco.presenter.dto.PessoaResponse;
-import br.edu.fiap.banco.application.usecase.PessoaService;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -23,12 +23,12 @@ import org.eclipse.microprofile.openapi.annotations.tags.Tag;
 @Produces(MediaType.APPLICATION_JSON)
 @Tag(name = "Pessoas")
 public class PessoaResource {
-    private final PessoaService service;
+    private final PessoaUseCase service;
 
     // CDI @Inject faz a injeção pelo construtor; no Spring, usa-se injeção
     // por construtor (com @Autowired opcional quando há um único construtor).
     @Inject
-    public PessoaResource(PessoaService service) {
+    public PessoaResource(PessoaUseCase service) {
         this.service = service;
     }
 

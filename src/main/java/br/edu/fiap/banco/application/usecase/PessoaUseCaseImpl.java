@@ -1,5 +1,6 @@
 package br.edu.fiap.banco.application.usecase;
 
+import br.edu.fiap.banco.application.ports.PessoaUseCase;
 import br.edu.fiap.banco.presenter.dto.PessoaRequest;
 import br.edu.fiap.banco.presenter.dto.PessoaResponse;
 import br.edu.fiap.banco.domain.model.Pessoa;
@@ -15,16 +16,17 @@ import jakarta.inject.Inject;
  * a classe seria tipicamente marcada com @Service.
  */
 @ApplicationScoped
-public class PessoaService {
+public class PessoaUseCaseImpl implements PessoaUseCase {
     private final PessoaRepository repository;
 
     // @Inject escolhe o construtor para CDI; corresponde à injeção por
     // construtor que o Spring também faz com @Autowired.
     @Inject
-    public PessoaService(PessoaRepository repository) {
+    public PessoaUseCaseImpl(PessoaRepository repository) {
         this.repository = repository;
     }
 
+    @Override
     public PessoaResponse cadastrar(PessoaRequest request) {
         if (repository.existePorCpf(request.cpf())) {
             throw new CpfJaCadastradoException();
@@ -33,6 +35,7 @@ public class PessoaService {
         return PessoaResponse.de(repository.salvar(pessoa));
     }
 
+    @Override
     public PessoaResponse getPessoaById(Long id) {
         return repository.getPessoaById(id)
                 .map(PessoaResponse::de)
@@ -42,6 +45,7 @@ public class PessoaService {
 //    Substituir nome, cpf, email do titular
 //    cpf soh é recusado quando ja pertence a outra pessoa
 
+    @Override
     public PessoaResponse atualizar(Long id, PessoaRequest request){
         Pessoa pessoaAtual = repository.getPessoaById(id).orElseThrow(PessoaNaoEncontradaException::new);
 
@@ -61,6 +65,7 @@ public class PessoaService {
         return  PessoaResponse.de(repository.atualizar(pessoa));
     }
 
+    @Override
     public void excluir(Long id){
         if(!repository.excluir(id)){
             throw new PessoaNaoEncontradaException();

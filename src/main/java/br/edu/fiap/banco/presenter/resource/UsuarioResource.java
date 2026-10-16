@@ -1,8 +1,8 @@
 package br.edu.fiap.banco.presenter.resource;
 
+import br.edu.fiap.banco.application.ports.UsuarioUseCase;
 import br.edu.fiap.banco.presenter.dto.UsuarioRequest;
 import br.edu.fiap.banco.presenter.dto.UsuarioResponse;
-import br.edu.fiap.banco.application.usecase.UsuarioService;
 import jakarta.annotation.security.PermitAll;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
@@ -24,10 +24,10 @@ import java.net.URI;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class UsuarioResource {
-    private final UsuarioService service;
+    private final UsuarioUseCase service;
 
     @Inject
-    public UsuarioResource(UsuarioService service) {
+    public UsuarioResource(UsuarioUseCase service) {
         this.service = service;
     }
 

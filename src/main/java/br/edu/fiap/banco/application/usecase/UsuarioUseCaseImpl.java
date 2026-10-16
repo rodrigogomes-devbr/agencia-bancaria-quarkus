@@ -1,6 +1,7 @@
 package br.edu.fiap.banco.application.usecase;
 
 
+import br.edu.fiap.banco.application.ports.UsuarioUseCase;
 import br.edu.fiap.banco.presenter.dto.UsuarioRequest;
 import br.edu.fiap.banco.presenter.dto.UsuarioResponse;
 import br.edu.fiap.banco.domain.model.Usuario;
@@ -11,16 +12,17 @@ import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 
 @ApplicationScoped
-public class UsuarioService {
+public class UsuarioUseCaseImpl implements UsuarioUseCase {
     private final UsuarioRepository usuario;
     private final SenhaBCrypt senhas;
 
     @Inject
-    public UsuarioService(UsuarioRepository usuarios, SenhaBCrypt senhas){
+    public UsuarioUseCaseImpl(UsuarioRepository usuarios, SenhaBCrypt senhas){
         this.usuario = usuarios;
         this.senhas = senhas;
     }
 
+    @Override
     public UsuarioResponse cadastrarUsuario(UsuarioRequest request){
         if(usuario.existePorEmail(request.email())){
             throw new EmailJaCadastradoException();

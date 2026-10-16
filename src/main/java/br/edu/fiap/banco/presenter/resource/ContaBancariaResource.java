@@ -1,8 +1,8 @@
 package br.edu.fiap.banco.presenter.resource;
 
+import br.edu.fiap.banco.application.ports.ContaBancariaUseCase;
 import br.edu.fiap.banco.presenter.dto.ContaBancariaRequest;
 import br.edu.fiap.banco.presenter.dto.ContaBancariaResponse;
-import br.edu.fiap.banco.application.usecase.ContaBancariaService;
 import io.quarkus.security.Authenticated;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
@@ -28,11 +28,11 @@ import java.util.List;
 @Consumes(MediaType.APPLICATION_JSON)
 @Produces(MediaType.APPLICATION_JSON)
 public class ContaBancariaResource {
-    private final ContaBancariaService service;
+    private final ContaBancariaUseCase service;
 
     /** Injeção por construtor mantém a dependência explícita e testável. */
     @Inject
-    public ContaBancariaResource(ContaBancariaService service) {
+    public ContaBancariaResource(ContaBancariaUseCase service) {
         this.service = service;
     }
 

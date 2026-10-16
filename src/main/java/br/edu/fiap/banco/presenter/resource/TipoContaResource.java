@@ -1,8 +1,8 @@
 package br.edu.fiap.banco.presenter.resource;
 
+import br.edu.fiap.banco.application.ports.TipoContaUseCase;
 import br.edu.fiap.banco.presenter.dto.TipoContaRequest;
 import br.edu.fiap.banco.presenter.dto.TipoContaResponse;
-import br.edu.fiap.banco.application.usecase.TipoContaService;
 import jakarta.inject.Inject;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
@@ -21,9 +21,9 @@ import java.util.List;
 @Tag(name = "Tipo Conta")
 public class TipoContaResource {
 
-    private final TipoContaService service;
+    private final TipoContaUseCase service;
     @Inject
-    public TipoContaResource(TipoContaService service) {
+    public TipoContaResource(TipoContaUseCase service) {
         this.service = service;
     }
 

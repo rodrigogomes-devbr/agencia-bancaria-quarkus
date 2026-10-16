@@ -1,6 +1,6 @@
 package br.edu.fiap.banco.service;
 
-import br.edu.fiap.banco.application.usecase.UsuarioService;
+import br.edu.fiap.banco.application.usecase.UsuarioUseCaseImpl;
 import br.edu.fiap.banco.presenter.dto.UsuarioRequest;
 import br.edu.fiap.banco.domain.model.Usuario;
 import br.edu.fiap.banco.application.ports.UsuarioRepository;
@@ -20,7 +20,7 @@ class UsuarioServiceTest {
         String senhaOriginal = "Senha@123";
         var repository = new UsuarioRepositoryFalso();
         var senhas = new SenhaBCrypt(12);
-        var service = new UsuarioService(repository, senhas);
+        var service = new UsuarioUseCaseImpl(repository, senhas);
 
         service.cadastrarUsuario(new UsuarioRequest("Ana Lima", "ana@example.test", senhaOriginal));
 

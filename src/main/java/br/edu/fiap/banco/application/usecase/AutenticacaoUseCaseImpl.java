@@ -1,5 +1,6 @@
 package br.edu.fiap.banco.application.usecase;
 
+import br.edu.fiap.banco.application.ports.AutenticacaoUseCase;
 import br.edu.fiap.banco.presenter.dto.AutenticacaoRequest;
 import br.edu.fiap.banco.domain.model.Usuario;
 import br.edu.fiap.banco.infrastructure.repository.UsuarioRepositoryJpa;
@@ -15,14 +16,14 @@ import java.util.Optional;
 import java.util.Set;
 
 @ApplicationScoped
-public class AutenticacaoService {
+public class AutenticacaoUseCaseImpl implements AutenticacaoUseCase {
     public static final String ROLE = "usuario";
 
     private final UsuarioRepositoryJpa usuarioRepositoryJpa;
     private final String segredo;
     private final String emissor;
 
-    public AutenticacaoService(
+    public AutenticacaoUseCaseImpl(
             UsuarioRepositoryJpa usuarioRepositoryJpa,
             @ConfigProperty(name = "security.jwt.secret") String segredo,
             @ConfigProperty(name = "security.jwt.issuer") String emissor) {
@@ -31,6 +32,7 @@ public class AutenticacaoService {
         this.emissor = emissor;
     }
 
+    @Override
     public Optional<String> autenticaEGeraToken(AutenticacaoRequest request) {
         Usuario usuario = usuarioRepositoryJpa.buscaPorEmail(request.email())
                 .orElseThrow(() -> new NotAuthorizedException("Bearer"));

@@ -1,8 +1,9 @@
 package br.edu.fiap.banco.presenter.resource;
 
+import br.edu.fiap.banco.application.ports.AutenticacaoUseCase;
 import br.edu.fiap.banco.presenter.dto.AutenticacaoRequest;
 import br.edu.fiap.banco.presenter.dto.UsuarioAutenticadoResponse;
-import br.edu.fiap.banco.application.usecase.AutenticacaoService;
+import br.edu.fiap.banco.application.usecase.AutenticacaoUseCaseImpl;
 import jakarta.annotation.security.PermitAll;
 import jakarta.annotation.security.RolesAllowed;
 import jakarta.inject.Inject;
@@ -23,9 +24,9 @@ public class AutenticacaoResource {
     @Inject
     JsonWebToken jwt;
 
-    private final AutenticacaoService service;
+    private final AutenticacaoUseCase service;
 
-    public AutenticacaoResource(AutenticacaoService service) {
+    public AutenticacaoResource(AutenticacaoUseCase service) {
         this.service = service;
     }
 
@@ -47,7 +48,7 @@ public class AutenticacaoResource {
 
     @GET
     @Path("/me")
-    @RolesAllowed(AutenticacaoService.ROLE)
+    @RolesAllowed(AutenticacaoUseCaseImpl.ROLE)
     public UsuarioAutenticadoResponse me() {
         return new UsuarioAutenticadoResponse(
                 jwt.getSubject(),

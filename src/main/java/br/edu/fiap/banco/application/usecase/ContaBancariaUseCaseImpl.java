@@ -1,5 +1,6 @@
 package br.edu.fiap.banco.application.usecase;
 
+import br.edu.fiap.banco.application.ports.ContaBancariaUseCase;
 import br.edu.fiap.banco.presenter.dto.ContaBancariaRequest;
 import br.edu.fiap.banco.presenter.dto.ContaBancariaResponse;
 
@@ -20,20 +21,21 @@ import java.util.List;
 
 
 @ApplicationScoped
-public class ContaBancariaService {
+public class ContaBancariaUseCaseImpl implements ContaBancariaUseCase {
     private final ContaBancariaRepository contas;
     private final PessoaRepository pessoas;
     private final TipoContaRepository tipos;
 
 
     @Inject
-    public ContaBancariaService(ContaBancariaRepository contas, PessoaRepository pessoas, TipoContaRepository tipos) {
+    public ContaBancariaUseCaseImpl(ContaBancariaRepository contas, PessoaRepository pessoas, TipoContaRepository tipos) {
         this.contas = contas;
         this.pessoas = pessoas;
         this.tipos = tipos;
     }
 
     /** Lista entidades e as converte para DTOs sem expor a camada de domínio. */
+    @Override
     public List<ContaBancariaResponse> listar() {
         return contas.listar().stream().map(ContaBancariaResponse::de).toList();
     }
@@ -42,6 +44,7 @@ public class ContaBancariaService {
      * Lista as contas de um titular.
      * A consulta prévia diferencia pessoa inexistente de pessoa sem contas.
      */
+    @Override
     public List<ContaBancariaResponse> listarPorTitular(Long titularId) {
         if (pessoas.getPessoaById(titularId).isEmpty()) {
             throw new PessoaNaoEncontradaException();
@@ -49,10 +52,12 @@ public class ContaBancariaService {
         return contas.listarPorTitular(titularId).stream().map(ContaBancariaResponse::de).toList();
     }
 
+    @Override
     public ContaBancariaResponse buscarPorId(Long id) {
         return ContaBancariaResponse.de(contas.buscarPorId(id).orElseThrow(ContaNaoEncontradaException::new));
     }
 
+    @Override
     public ContaBancariaResponse criarConta(ContaBancariaRequest request) {
         if(contas.existePorAgenciaENumero(request.agencia(), request.numero())) {
             throw new ContaJaCadastradaException();
@@ -76,6 +81,7 @@ public class ContaBancariaService {
 
 
     /** Encerra logicamente a conta e transforma ID ausente em 404. */
+    @Override
     public void encerrar(Long id) {
         if (!contas.encerrar(id)) {
             throw new ContaNaoEncontradaException();
@@ -85,6 +91,7 @@ public class ContaBancariaService {
     /**
      * Atualiza agência, número e tipo, preservando titular, saldo e estado.
      */
+    @Override
     public ContaBancariaResponse atualizar(Long id, ContaBancariaRequest request) {
         ContaBancaria atual = contas.buscarPorId(id)
                 .orElseThrow(ContaNaoEncontradaException::new);
