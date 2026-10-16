@@ -6,7 +6,7 @@ import jakarta.validation.constraints.NotBlank;
 
 @Schema(description = "Credenciais usadas para solicitar o JWT")
 public record AutenticacaoRequest(
-        @Schema(example = "mariana@example.com")
+        @Schema(example = "ana@example.test")
         @NotBlank(message = "E-mail é obrigatório.")
         @Email(message = "E-mail deve possuir formato válido.")
         String email,
