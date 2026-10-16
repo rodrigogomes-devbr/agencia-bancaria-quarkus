@@ -1,11 +1,10 @@
 package br.edu.fiap.banco.application.usecase;
 
-import br.edu.fiap.banco.application.ports.TipoContaUseCase;
 import br.edu.fiap.banco.presenter.dto.TipoContaRequest;
 import br.edu.fiap.banco.presenter.dto.TipoContaResponse;
 import br.edu.fiap.banco.domain.model.TipoConta;
 import br.edu.fiap.banco.domain.exception.TipoContaJaCadastradoException;
-import br.edu.fiap.banco.domain.exception.TipoContaNaoEncontradoException;
+import br.edu.fiap.banco.application.exception.TipoContaNaoEncontradoException;
 import br.edu.fiap.banco.infrastructure.repository.TipoContaRepositoryImpl;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

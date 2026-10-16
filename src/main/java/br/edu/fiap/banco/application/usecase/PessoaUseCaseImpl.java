@@ -1,11 +1,10 @@
 package br.edu.fiap.banco.application.usecase;
 
-import br.edu.fiap.banco.application.ports.PessoaUseCase;
 import br.edu.fiap.banco.presenter.dto.PessoaRequest;
 import br.edu.fiap.banco.presenter.dto.PessoaResponse;
 import br.edu.fiap.banco.domain.model.Pessoa;
 import br.edu.fiap.banco.domain.exception.CpfJaCadastradoException;
-import br.edu.fiap.banco.domain.exception.PessoaNaoEncontradaException;
+import br.edu.fiap.banco.application.exception.PessoaNaoEncontradaException;
 import br.edu.fiap.banco.application.ports.PessoaRepository;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

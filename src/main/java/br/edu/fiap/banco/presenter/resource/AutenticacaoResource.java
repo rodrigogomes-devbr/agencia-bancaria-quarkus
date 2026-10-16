@@ -1,6 +1,6 @@
 package br.edu.fiap.banco.presenter.resource;
 
-import br.edu.fiap.banco.application.ports.AutenticacaoUseCase;
+import br.edu.fiap.banco.application.usecase.AutenticacaoUseCase;
 import br.edu.fiap.banco.presenter.dto.AutenticacaoRequest;
 import br.edu.fiap.banco.presenter.dto.UsuarioAutenticadoResponse;
 import br.edu.fiap.banco.application.usecase.AutenticacaoUseCaseImpl;

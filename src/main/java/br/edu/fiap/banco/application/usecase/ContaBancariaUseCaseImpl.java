@@ -1,6 +1,5 @@
 package br.edu.fiap.banco.application.usecase;
 
-import br.edu.fiap.banco.application.ports.ContaBancariaUseCase;
 import br.edu.fiap.banco.presenter.dto.ContaBancariaRequest;
 import br.edu.fiap.banco.presenter.dto.ContaBancariaResponse;
 
@@ -8,9 +7,9 @@ import br.edu.fiap.banco.domain.model.ContaBancaria;
 import br.edu.fiap.banco.domain.model.Pessoa;
 import br.edu.fiap.banco.domain.model.TipoConta;
 import br.edu.fiap.banco.domain.exception.ContaJaCadastradaException;
-import br.edu.fiap.banco.domain.exception.ContaNaoEncontradaException;
-import br.edu.fiap.banco.domain.exception.PessoaNaoEncontradaException;
-import br.edu.fiap.banco.domain.exception.TipoContaNaoEncontradoException;
+import br.edu.fiap.banco.application.exception.ContaNaoEncontradaException;
+import br.edu.fiap.banco.application.exception.PessoaNaoEncontradaException;
+import br.edu.fiap.banco.application.exception.TipoContaNaoEncontradoException;
 import br.edu.fiap.banco.application.ports.ContaBancariaRepository;
 import br.edu.fiap.banco.application.ports.PessoaRepository;
 import br.edu.fiap.banco.application.ports.TipoContaRepository;

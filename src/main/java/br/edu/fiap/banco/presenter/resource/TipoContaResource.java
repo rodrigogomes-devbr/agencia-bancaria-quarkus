@@ -1,6 +1,6 @@
 package br.edu.fiap.banco.presenter.resource;
 
-import br.edu.fiap.banco.application.ports.TipoContaUseCase;
+import br.edu.fiap.banco.application.usecase.TipoContaUseCase;
 import br.edu.fiap.banco.presenter.dto.TipoContaRequest;
 import br.edu.fiap.banco.presenter.dto.TipoContaResponse;
 import jakarta.inject.Inject;

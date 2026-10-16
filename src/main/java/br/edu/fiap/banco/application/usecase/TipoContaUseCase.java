@@ -1,8 +1,7 @@
-package br.edu.fiap.banco.application.ports;
+package br.edu.fiap.banco.application.usecase;
 
 import br.edu.fiap.banco.presenter.dto.TipoContaRequest;
 import br.edu.fiap.banco.presenter.dto.TipoContaResponse;
-import br.edu.fiap.banco.presenter.resource.TipoContaResource;
 
 import java.util.List;
 

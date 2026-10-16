@@ -5,7 +5,7 @@ import br.edu.fiap.banco.domain.model.ContaBancaria;
 import br.edu.fiap.banco.domain.model.Pessoa;
 import br.edu.fiap.banco.domain.model.TipoConta;
 import br.edu.fiap.banco.domain.exception.ContaJaCadastradaException;
-import br.edu.fiap.banco.domain.exception.ContaNaoEncontradaException;
+import br.edu.fiap.banco.application.exception.ContaNaoEncontradaException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 

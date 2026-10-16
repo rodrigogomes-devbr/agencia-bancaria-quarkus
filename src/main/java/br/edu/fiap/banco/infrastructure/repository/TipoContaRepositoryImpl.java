@@ -2,7 +2,7 @@ package br.edu.fiap.banco.infrastructure.repository;
 
 import br.edu.fiap.banco.application.ports.TipoContaRepository;
 import br.edu.fiap.banco.domain.model.TipoConta;
-import br.edu.fiap.banco.domain.exception.TipoContaNaoEncontradoException;
+import br.edu.fiap.banco.application.exception.TipoContaNaoEncontradoException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;
 

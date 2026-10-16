@@ -1,6 +1,6 @@
 package br.edu.fiap.banco.presenter.resource;
 
-import br.edu.fiap.banco.application.ports.UsuarioUseCase;
+import br.edu.fiap.banco.application.usecase.UsuarioUseCase;
 import br.edu.fiap.banco.presenter.dto.UsuarioRequest;
 import br.edu.fiap.banco.presenter.dto.UsuarioResponse;
 import jakarta.annotation.security.PermitAll;

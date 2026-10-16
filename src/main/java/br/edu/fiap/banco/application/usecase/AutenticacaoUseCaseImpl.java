@@ -1,6 +1,5 @@
 package br.edu.fiap.banco.application.usecase;
 
-import br.edu.fiap.banco.application.ports.AutenticacaoUseCase;
 import br.edu.fiap.banco.presenter.dto.AutenticacaoRequest;
 import br.edu.fiap.banco.domain.model.Usuario;
 import br.edu.fiap.banco.infrastructure.repository.UsuarioRepositoryJpa;

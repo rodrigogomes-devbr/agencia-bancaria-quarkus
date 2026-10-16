@@ -1,5 +1,6 @@
-package br.edu.fiap.banco.domain.exception;
+package br.edu.fiap.banco.application.exception;
 
+import br.edu.fiap.banco.domain.exception.ErroNegocioException;
 import jakarta.ws.rs.core.Response;
 
 public class TipoContaNaoEncontradoException

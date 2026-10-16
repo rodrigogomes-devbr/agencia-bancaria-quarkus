@@ -1,4 +1,4 @@
-package br.edu.fiap.banco.application.ports;
+package br.edu.fiap.banco.application.usecase;
 
 import br.edu.fiap.banco.presenter.dto.ContaBancariaRequest;
 import br.edu.fiap.banco.presenter.dto.ContaBancariaResponse;

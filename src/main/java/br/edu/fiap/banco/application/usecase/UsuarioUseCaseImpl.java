@@ -1,7 +1,6 @@
 package br.edu.fiap.banco.application.usecase;
 
 
-import br.edu.fiap.banco.application.ports.UsuarioUseCase;
 import br.edu.fiap.banco.presenter.dto.UsuarioRequest;
 import br.edu.fiap.banco.presenter.dto.UsuarioResponse;
 import br.edu.fiap.banco.domain.model.Usuario;

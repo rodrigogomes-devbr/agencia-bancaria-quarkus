@@ -2,7 +2,7 @@ package br.edu.fiap.banco.infrastructure.repository;
 
 import br.edu.fiap.banco.application.ports.PessoaRepository;
 import br.edu.fiap.banco.domain.model.Pessoa;
-import br.edu.fiap.banco.domain.exception.PessoaNaoEncontradaException;
+import br.edu.fiap.banco.application.exception.PessoaNaoEncontradaException;
 import br.edu.fiap.banco.domain.exception.PessoaPossuiContaException;
 import jakarta.enterprise.context.ApplicationScoped;
 import jakarta.inject.Inject;

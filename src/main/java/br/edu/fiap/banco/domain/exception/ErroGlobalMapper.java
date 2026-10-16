@@ -6,7 +6,7 @@ import jakarta.ws.rs.ext.ExceptionMapper;
 import jakarta.ws.rs.ext.Provider;
 import java.util.Map;
 
-abstract class ErroNegocioException extends RuntimeException {
+public abstract class ErroNegocioException extends RuntimeException {
     private final Response.Status status;
 
     protected ErroNegocioException(Response.Status status, String mensagem) {

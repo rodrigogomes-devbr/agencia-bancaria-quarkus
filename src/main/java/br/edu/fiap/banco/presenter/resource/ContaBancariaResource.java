@@ -1,6 +1,6 @@
 package br.edu.fiap.banco.presenter.resource;
 
-import br.edu.fiap.banco.application.ports.ContaBancariaUseCase;
+import br.edu.fiap.banco.application.usecase.ContaBancariaUseCase;
 import br.edu.fiap.banco.presenter.dto.ContaBancariaRequest;
 import br.edu.fiap.banco.presenter.dto.ContaBancariaResponse;
 import io.quarkus.security.Authenticated;

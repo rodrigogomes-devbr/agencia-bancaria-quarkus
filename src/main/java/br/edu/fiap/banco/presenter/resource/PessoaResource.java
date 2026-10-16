@@ -1,6 +1,6 @@
 package br.edu.fiap.banco.presenter.resource;
 
-import br.edu.fiap.banco.application.ports.PessoaUseCase;
+import br.edu.fiap.banco.application.usecase.PessoaUseCase;
 import br.edu.fiap.banco.presenter.dto.PessoaRequest;
 import br.edu.fiap.banco.presenter.dto.PessoaResponse;
 import jakarta.inject.Inject;
