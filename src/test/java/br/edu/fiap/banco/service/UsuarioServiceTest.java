@@ -1,9 +1,10 @@
 package br.edu.fiap.banco.service;
 
-import br.edu.fiap.banco.dto.UsuarioRequest;
-import br.edu.fiap.banco.entity.Usuario;
-import br.edu.fiap.banco.repository.UsuarioRepository;
-import br.edu.fiap.banco.security.SenhaBCrypt;
+import br.edu.fiap.banco.application.usecase.UsuarioService;
+import br.edu.fiap.banco.presenter.dto.UsuarioRequest;
+import br.edu.fiap.banco.domain.model.Usuario;
+import br.edu.fiap.banco.application.ports.UsuarioRepository;
+import br.edu.fiap.banco.infrastructure.security.SenhaBCrypt;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
